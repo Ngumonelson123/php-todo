@@ -27,7 +27,11 @@ pipeline {
             steps {
                 sh 'mv .env.sample .env'
                 sh 'mkdir -p bootstrap/cache'
-                sh 'chmod -R 777 bootstrap/cache'
+                sh 'mkdir -p storage/framework/sessions'
+                sh 'mkdir -p storage/framework/views'
+                sh 'mkdir -p storage/framework/cache'
+                sh 'mkdir -p storage/logs'
+                sh 'chmod -R 777 storage bootstrap/cache'
                 sh 'composer install'
                 sh 'php artisan key:generate'
                 sh 'php artisan migrate --force'
