@@ -26,6 +26,8 @@ pipeline {
         stage('Prepare Dependencies') {
             steps {
                 sh 'mv .env.sample .env'
+                sh 'mkdir -p bootstrap/cache'
+                sh 'chmod -R 777 bootstrap/cache'
                 sh 'composer install'
                 sh 'php artisan key:generate'
                 sh 'php artisan migrate --force'
